@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection.Metadata;
+using System.Text;
 using System.Text.Json;
 
 namespace Auth
@@ -103,7 +104,6 @@ namespace Auth
 
         static void Main(string[] args)
         {
-
             Console.WriteLine("Hello, Username");
             Console.WriteLine("1. Зарегестрироваться");
             Console.WriteLine("2. Авторизоваться");
@@ -112,12 +112,30 @@ namespace Auth
             {
                 case 1:
                     {
+                        Console.Clear();
                         Console.WriteLine("Введите ваш логин: ");
                         String login = Console.ReadLine();
+                        var sb = new StringBuilder();
+                        ConsoleKeyInfo consoleKeyInfo;
                         Console.WriteLine("Введите пароль: ");
-                        String password1 = Console.ReadLine();
+                        do
+                        {
+                            consoleKeyInfo = Console.ReadKey(true);
+                            Console.Write("*");
+                            sb.Append(consoleKeyInfo.KeyChar);
+                        } while (consoleKeyInfo.Key != ConsoleKey.Enter);
+
+                        String password1 = sb.ToString();
                         Console.WriteLine("Повторите пароль: ");
-                        String password2 = Console.ReadLine();
+                        sb = null;
+                        do
+                        {
+                            consoleKeyInfo = Console.ReadKey(true);
+                            Console.Write("*");
+                            sb.Append(consoleKeyInfo.KeyChar);
+                        } while (consoleKeyInfo.Key != ConsoleKey.Enter);
+
+                        String password2 = sb.ToString();
                         if (password1 == password2)
                         {
                             SignUp(login, password1);
@@ -130,10 +148,20 @@ namespace Auth
                     }
                 case 2:
                     {
+                        Console.Clear();
                         Console.WriteLine("Введите логин: ");
                         String login = Console.ReadLine();
+                        var sb = new StringBuilder();
+                        ConsoleKeyInfo consoleKeyInfo;
                         Console.WriteLine("Введите пароль: ");
-                        String password = Console.ReadLine();
+                        do
+                        {
+                            consoleKeyInfo = Console.ReadKey(true);
+                            Console.Write("*");
+                            sb.Append(consoleKeyInfo.KeyChar);
+                        } while (consoleKeyInfo.Key != ConsoleKey.Enter);
+
+                        String password = sb.ToString();
                         InitUsers(login, password);
                         break;
                     }
